@@ -1,0 +1,39 @@
+# values.yaml
+deployment:
+  replicas: 2  # Nombre de pods Traefik
+
+service:
+  type: LoadBalancer  # Utilisation d'un LoadBalancer pour exposer Traefik
+  annotations:
+    service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
+    service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
+    service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "100"
+
+ingressRoute:
+  dashboard:
+    enabled: true  # Active l'Ingress pour le dashboard
+
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "olivier@cloudstart.fr"  # Remplacez par votre email
+      storage: "/data/acme.json"
+      httpChallenge:
+        entryPoint: web
+
+ports:
+  web:
+    redirectTo: websecure
+  websecure:
+    tls:
+      certResolver: letsencrypt
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
