@@ -24,9 +24,9 @@ certificatesResolvers:
 # Configuration du provider Cloudflare
 providers:
   cloudflare:
-    email: olivier@cloudstart.fr
-    cloudflareAPIKey: e681e20205589b137a325beedfde5ca419049
-    cloudflareAPIToken: CP7ww66lfTYZ_PonhumFmloXQlyEH__xziZRWUSn
+    email: xxx@xxxx.fr
+    cloudflareAPIKey: xxx
+    cloudflareAPIToken: xxxx
 
 # Configuration de l'entrée pour le dashboard
 ports:
