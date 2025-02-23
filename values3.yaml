@@ -55,6 +55,6 @@ ingressRoute:
 # Configuration des variables d'environnement pour Cloudflare
 env:
   - name: CF_API_EMAIL
-    value: cloudstart@proton.me
+    value: xx@xx.me
   - name: CF_API_KEY
-    value: e681e20205589b137a325beedfde5ca419049
+    value: xx
