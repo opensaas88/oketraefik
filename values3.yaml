@@ -1,0 +1,55 @@
+# values.yaml
+
+# Configuration de base
+image:
+  tag: v3.3
+
+# Activer le dashboard
+dashboard:
+  enabled: true
+
+# Configuration des certificats Let's Encrypt
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: cloudstart@proton.me
+      storage: /data/acme.json
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 0
+        resolvers:
+          - "8.8.8.8:53"
+          - "1.1.1.1:53"
+
+# Configuration du provider Cloudflare
+providers:
+  kubernetesCRD:
+    enabled: true
+
+# Configuration de l'entrée pour le dashboard
+ports:
+  web:
+    redirectTo: websecure
+  websecure:
+    tls:
+      enabled: true
+      certResolver: cloudflare
+
+# Configuration des annotations pour le dashboard
+ingressRoute:
+  dashboard:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    labels:
+      app: traefik
+    matchRule: Host(`traefik.cluster.exo7.cloud`)
+    tls:
+      certResolver: cloudflare
+
+# Configuration des variables d'environnement pour Cloudflare
+env:
+  - name: CF_API_EMAIL
+    value: cloudstart@proton.me
+  - name: CF_API_KEY
+    value: e681e20205589b137a325beedfde5ca419049
