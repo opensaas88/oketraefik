@@ -12,7 +12,7 @@ dashboard:
 certificatesResolvers:
   cloudflare:
     acme:
-      email: cloudstart@proton.me
+      email: votre-email@example.com
       storage: /data/acme.json
       dnsChallenge:
         provider: cloudflare
@@ -21,16 +21,21 @@ certificatesResolvers:
           - "8.8.8.8:53"
           - "1.1.1.1:53"
 
-# Configuration du provider Cloudflare
+# Configuration du provider KubernetesCRD
 providers:
   kubernetesCRD:
     enabled: true
 
-# Configuration de l'entrée pour le dashboard
+# Configuration des ports
 ports:
   web:
-    redirectTo: websecure
+    expose: true
+    exposedPort: 80
+    protocol: TCP
   websecure:
+    expose: true
+    exposedPort: 443
+    protocol: TCP
     tls:
       enabled: true
       certResolver: cloudflare
